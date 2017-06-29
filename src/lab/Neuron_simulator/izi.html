@@ -1,0 +1,133 @@
+<div name='izi' class="panel-body">
+    <!-- The Graphs -->
+    <div class="col-md-7">
+        <div id="voltage-current" style="height:350px; min-width: 300px"></div>
+
+    </div>
+    <div class="col-md-5">
+        <!-- The Controls for Parameters -->
+        <button class="btn btn-md btn-danger" onclick="runsim()">Run</button>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#membrane">
+                                        Neuron Parameters
+                                    </a>
+                    </h4>
+                </div>
+                <div id="membrane" class="panel-collapse collapse">
+                    <div class="panel-body">
+
+                        <div class="table-responsive ">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Value</th>
+
+                                </tr>
+                                <tr>
+                                    <th>a</th>
+                                    <th><input id="input-box" type="number" name="a" min="-200" max="2000" value="0.02"></th>
+
+                                </tr>
+                                <tr>
+                                    <th>b</th>
+                                    <th><input id="input-box" type="number" name="b" min="-200" max="2000" value="0.2"></th>
+
+                                </tr>
+
+                                <tr>
+                                    <th>c</th>
+                                    <th><input id="input-box" type="number" name="c" min="-200" max="2000" value="-65"></th>
+
+                                </tr>
+                                <br>
+
+                                <tr>
+                                    <th>d</th>
+                                    <th><input id="input-box" type="number" name="d" min="-200" max="2000" value="8"></th>
+
+                                </tr>
+
+                                <tr>
+                                    <th>v</th>
+                                    <th><input id="input-box" type="number" name="v" min="-200" max="2000" value="-80"></th>
+
+                                </tr>
+                                <tr>
+                                    <th>u</th>
+                                    <th><input id="input-box" type="number" name="u" min="-200" max="2000" value="0"></th>
+
+                                </tr>
+                                <tr>
+                                    <th>I</th>
+                                    <th><input id="input-box" type="number" name="I" min="-200" max="2000" value="15"></th>
+
+                                </tr>
+                                <tr>
+                                    <th>SimTime</th>
+                                    <th><input id="input-box" type="number" name="T" min="-200" max="2000" value="350"></th>
+
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#preset">
+                                        Preset Neuron Parameters
+                                    </a>
+                    </h4>
+                </div>
+                <div id="preset" class="panel-collapse collapse">
+                    <div class="panel-body">
+
+                        <div class="table-responsive ">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Preset Modes</th>
+                                    <th></th>
+
+
+                                </tr>
+                                <tr>
+                                    <th><button class="btn btn-md btn-primary" onclick="RS()">Regular Spiking</button> </th>
+                                    <th><button class="btn btn-md btn-primary" onclick="IB()">Instrinsically Bursting</button> </th>
+
+
+                                </tr>
+                                <tr>
+                                    <th><button class="btn btn-md btn-primary" onclick="CH()">Chattering</button> </th>
+                                    <th><button class="btn btn-md btn-primary" onclick="FS()">Fast Spiking</button> </th>
+
+                                </tr>
+
+                                <tr>
+                                    <th><button class="btn btn-md btn-primary" onclick="TC()">Thalamo Cortical</button> </th>
+                                    <th><button class="btn btn-md btn-primary" onclick="RZ()">Rezonator</button> </th>
+
+                                </tr>
+                                <br>
+
+                                <tr>
+                                    <th><button class="btn btn-md btn-primary" onclick="LTS()">Low-Threshold Spiking</button> </th>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/izikevichSN.js"></script>

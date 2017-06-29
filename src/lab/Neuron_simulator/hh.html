@@ -1,0 +1,1300 @@
+<div id="hh" name='hh' class="panel-body">
+    <!-- The Graphs -->
+    <div class="col-md-7">
+        <div id="voltage-current" style="width:100%;margin: 0 auto"></div>
+        <div id="m-n-h" style="height:250px; min-width: 300px"></div>
+    </div>
+    <div class="col-md-5">
+        <!-- The Controls for Parameters -->
+        <div class="panel-group" id="accordion">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#sim_params">
+                                        Simulation parameters
+                                    </a>
+                    </h4>
+                </div>
+                <div id="sim_params" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="col-md-10">
+
+                            <div id="myButtons" class="btn-group col-md-10" data-toggle="buttons">
+                                <label value="vclamp" class="btn bt-sm btn-primary active">
+    <input value="cclamp" type="radio" name="options" id="option1" autocomplete="off" checked> Current Clamp
+  </label>
+                                <label value="vclamp" class="btn bt-sm btn-primary">
+    <input value="vclamp" type="radio" name="options" id="option2" autocomplete="off"> Voltage Clamp
+  </label>
+                               
+
+                            </div>
+                            <div class="col-md-4"><input type="checkbox" name="multi" id="multi" value="0" /><label>Single Graph</label></div>
+                             
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#membrane">
+                                        Membrane
+                                    </a>
+                    </h4>
+                </div>
+                <div id="membrane" class="panel-collapse collapse">
+                    <div class="panel-body">
+
+                        <div class="table-responsive ">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th></th>
+                                    <th>C<sub>in</sub>(mM)</th>
+                                    <th>C<sub>out</sub>(mM)</th>
+                                    <th>E<sub>ion</sub>(mM)</th>
+                                </tr>
+                                <tr>
+                                    <th>Na<sup>+</sup></th>
+                                    <th><input id="input-box" type="number" name="nai" min="-200" max="2000" value="50" onchange="Ena_change()"></th>
+                                    <th><input id="input-box" type="number" name="nao" min="-200" max="2000" value="440" onchange="Ena_change()"></th>
+                                    <th><input id="input-box" type="number" name="ena" min="-200" max="2000" value="52.37">mV</th>
+                                </tr>
+                                <tr>
+                                    <th>K<sup>+</sup></th>
+                                    <th><input id="input-box" onchange="Ek_change()" type="number" name="ki" min="-200" max="2000" value="400"></th>
+                                    <th><input id="input-box" type="number" onchange="Ek_change()" name="ko" min="-200" max="2000" value="20"></th>
+                                    <th><input id="input-box" type="number" name="ek" min="-200" max="2000" value="-72.14">mV</th>
+                                </tr>
+
+                                <tr>
+                                    <th>Cl<sup>-</sup></th>
+                                    <th><input id="input-box" type="number" onchange="ECl_change()" name="cli" min="-200" max="2000" value="52"></th>
+                                    <th><input id="input-box" onchange="ECl_change()" type="number" name="clo" min="-200" max="2000" value="560"></th>
+                                    <th><input id="input-box" type="number" name="ecl" min="-200" max="200" value="-57.24">mV</th>
+                                </tr>
+                                <br>
+
+                                <tr>
+                                    <th></th>
+                                    <th>T(<sup>o</sup>C)</th>
+                                    <th><input id="input-box" type="number" onchange="T_change()" name="t" min="-200.3" max="200.3" value="6.3"></th>
+                                </tr>
+
+                                <tr>
+                                    <th></th>
+                                    <th>R<sub>m</sub></th>
+                                    <th><input id="input-box" type="number" name="rm" min="-200.1" max="200.1" value="5.1">MΩ</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>C<sub>m</sub>(nF)</th>
+                                    <th><input id="input-box" type="number" name="cm" min="-200" max="200" value="1"></th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>V<sub>r</sub>(mV)</th>
+                                    <th><input id="input-box" type="number" name="vr" min="-200.77" max="200.77" value="-47.77">mV</th>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#channel">
+                                        Channel
+                                    </a>
+                    </h4>
+                </div>
+                <div id="channel" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-boredered">
+                                <tr>
+                                    <th style="width:30px"></th>
+                                    <th>passive g<sub>Na</sub>(uS)</th>
+                                    <th style="width:30px"></th>
+                                    <th><input id="input-box" type="number" name="gpassna" min="-200.0265" max="200" value="0.0265"></th>
+                                </tr>
+                                <tr>
+                                    <th style="width:30px"></th>
+                                    <th>passive g<sub>K</sub>(uS)</th>
+                                    <th style="width:30px"></th>
+                                    <th><input id="input-box" type="number" name="gpassk" min="-200.1" max="200" value="0.07"></th>
+                                </tr>
+                                <tr>
+                                    <th style="width:30px"></th>
+                                    <th>passive g<sub>Cl</sub>(uS)</th>
+                                    <th style="width:30px"></th>
+                                    <th><input id="input-box" type="number" name="gpasscl" min="-200.1" max="200" value="0.1"></th>
+                                </tr>
+
+
+                            </table>
+
+                            <!-- Trigger the modal with a button -->
+                            <button type="button" class="btn" data-toggle="modal" data-target="#myModal">Channel Details</button>
+
+                            <!-- Modal -->
+                            <div id="myModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Channel Details</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+
+                                                <!-- Nav tabs -->
+                                                <ul id="mytabs" class="nav nav-tabs" role="tablist">
+                                                    <li class="active">
+                                                        <a href="#fast_sodium" role="tab" data-toggle="tab">
+                                                            <icon class="fa fa-home"></icon> Fast Sodium
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#delyaed_rectifier" role="tab" data-toggle="tab">
+                                                            <i class="fa fa-user"></i> Delayed Rectifier
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#User_channel" role="tab" data-toggle="tab">
+                                                            <i class="fa fa-envelope"></i> User Channel
+                                                        </a>
+                                                    </li>
+                                                </ul>
+
+                                                <!-- Tab panes -->
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade active in" id="fast_sodium">
+                                                        <div class="col-md-6">
+                                                            <table class="table table-boredered">
+                                                                <tr>
+                                                                    <th>g<sub>max</sub>(us)</th>
+                                                                    <th><input id="input-box" type="number" name="gnamax" min="-200" max="200" value="120"></th>
+                                                                </tr>
+                                                            </table>
+
+
+                                                            <div class="panel-group" id="accordion">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion2" href="#m">
+                                                                                        Channel Status: m 
+                                                                                    </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="m" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            <div class="dropdown">
+                                                                                <label>Exponent: </label>
+                                                                                <button name="mexp" value="3" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               3
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                <ul class="dropdown-menu mexponent" aria-labelledby="mexponentli">
+                                                                                    <li><a href="#">1</a></li>
+                                                                                    <li><a href="#">2</a></li>
+                                                                                    <li><a href="#">3</a></li>
+                                                                                    <li><a href="#">4</a></li>
+                                                                                    <li><a href="#">5</a></li>
+                                                                                    <li><a href="#">6</a></li>
+                                                                                </ul>
+                                                                            </div>
+
+
+
+
+
+
+
+                                                                            <div class="col-md-6">
+
+                                                                                <table class="table table-bordered">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <div class="dropdown">
+
+                                                                                                <button name="malpha_equation" value="2" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               Choose Equation
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                                <ul class="dropdown-menu malpha_equation" aria-labelledby="malphaequationli">
+                                                                                                    <li>
+                                                                                                        <a href="#" value='1'>
+                                                                                                            <p value="1" name='equ'>c*(V-th)/(1-exp[(V-th)*s</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='2'>
+                                                                                                            <p value="2" name='equ'>c/(1+exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='3'>
+                                                                                                            <p value="3" name='equ'>c*(exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+
+                                                                                                </ul>
+                                                                                            </div>
+
+
+
+                                                                                        </tr>
+                                                                                        <tr>Alpha: Closed --> Open</tr>
+                                                                                        <tr>
+                                                                                            <th>Magnitude</th>
+                                                                                            <th><input id="input-box" type="number" name="mac" min="-200" max="200" value="0.100"></th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <th>Threshold</th>
+                                                                                            <th><input id="input-box" type="number" name="math" min="-200" max="200" value="-40.000"></th>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <th>Slope</th>
+                                                                                            <th><input id="input-box" type="number" name="mas" min="-200" max="200" value="-0.100"></th>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+
+
+
+                                                                            </div>
+                                                                            <div class="col-md-2">
+
+
+
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+
+
+                                                                                <table class="table table-bordered">
+                                                                                    <thead>
+                                                                                        <tr>
+
+                                                                                            <div class="dropdown">
+
+                                                                                                <button name="mbeta_equation" value="1" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               Choose Equation
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                                <ul class="dropdown-menu mbeta_equation" aria-labelledby="mbetaequationli">
+                                                                                                    <li>
+                                                                                                        <a href="#" value='1'>
+                                                                                                            <p name='equ'>c*(V-th)/(1-exp[(V-th)*s</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='2'>
+                                                                                                            <p name='equ'>c/(1+exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='3'>
+                                                                                                            <p name='equ'>c*(exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+
+                                                                                                </ul>
+                                                                                            </div>
+
+                                                                                        </tr>
+
+                                                                                        <tr>Beta: Open --> Closed</tr>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="mbc" min="-200" max="200" value="4.000"></th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="mbth" min="-200" max="200" value="-65.000"></th>
+                                                                                        </tr>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="mbs" min="-200" max="200" value="-0.05555"></th>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+
+                                                                            </div>
+
+
+
+
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion2" href="#h">
+                                                                                        Channel Status: h
+                                                                                    </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="h" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+
+                                                                            <div class="dropdown">
+                                                                                <label>Exponent: </label>
+                                                                                <button name="hexp" value="1" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               1
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                <ul class="dropdown-menu hexponent" aria-labelledby="hexponentli">
+                                                                                    <li><a href="#">1</a></li>
+                                                                                    <li><a href="#">2</a></li>
+                                                                                    <li><a href="#">3</a></li>
+                                                                                    <li><a href="#">4</a></li>
+                                                                                    <li><a href="#">5</a></li>
+                                                                                    <li><a href="#">6</a></li>
+                                                                                </ul>
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+
+                                                                                <table class="table table-bordered">
+                                                                                    <thead>
+                                                                                        <tr>
+
+                                                                                            <div class="dropdown">
+
+                                                                                                <button name="halpha_equation" value="1" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               Choose Equation
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                                <ul class="dropdown-menu halpha_equation" aria-labelledby="halphaequationli">
+                                                                                                    <li>
+                                                                                                        <a href="#" value='1'>
+                                                                                                            <p name='equ'>c*(V-th)/(1-exp[(V-th)*s</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='2'>
+                                                                                                            <p name='equ'>c/(1+exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='3'>
+                                                                                                            <p name='equ'>c*(exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+
+                                                                                                </ul>
+                                                                                            </div>
+
+                                                                                        </tr>
+                                                                                        <tr>Alpha: Closed --> Open</tr>
+                                                                                        <tr>
+                                                                                            <th>Magnitude</th>
+                                                                                            <th><input id="input-box" type="number" name="hac" min="-200" max="200" value="0.070"></th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <th>Threshold</th>
+                                                                                            <th><input id="input-box" type="number" name="hath" min="-200" max="200" value="-65.000"></th>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <th>Slope</th>
+                                                                                            <th><input id="input-box" type="number" name="has" min="-200" max="200" value="-0.050"></th>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+
+
+
+                                                                            </div>
+                                                                            <div class="col-md-2">
+
+
+
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+
+
+                                                                                <table class="table table-bordered">
+                                                                                    <thead>
+
+                                                                                        <tr>
+
+                                                                                            <div class="dropdown">
+
+                                                                                                <button name="hbeta_equation" value="3" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               Choose Equation
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                                <ul class="dropdown-menu hbeta_equation" aria-labelledby="hbetaequationli">
+                                                                                                    <li>
+                                                                                                        <a href="#" value='1'>
+                                                                                                            <p name='equ'>c*(V-th)/(1-exp[(V-th)*s</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='2'>
+                                                                                                            <p name='equ'>c/(1+exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='3'>
+                                                                                                            <p name='equ'>c*(exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+
+                                                                                                </ul>
+                                                                                            </div>
+
+                                                                                        </tr>
+
+                                                                                        <tr>Beta: Open --> Closed</tr>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="hbc" min="-200" max="200" value="1.00"></th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="hbth" min="-200" max="200" value="-35.000"></th>
+                                                                                        </tr>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="hbs" min="-200" max="200" value="-0.100"></th>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+
+                                                                            </div>
+
+
+
+
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+
+
+
+
+
+                                                    </div>
+                                                    <div class="tab-pane fade" id="delyaed_rectifier">
+                                                        <div class="col-md-6">
+
+                                                            <table class="table table-boredered">
+                                                                <tr>
+                                                                    <th>g<sub>max</sub>(us)</th>
+                                                                    <th><input id="input-box" type="number" name="gkmax" min="-200" max="200" value="36"></th>
+                                                                </tr>
+                                                            </table>
+
+                                                            <div class="panel-group" id="accordion">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion3" href="#n">
+                                                                                        Channel Status: n
+                                                                                    </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="n" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            <div class="dropdown">
+                                                                                <label>Exponent: </label>
+                                                                                <button name="nexp" value="4" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               4
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                <ul class="dropdown-menu nexponent" aria-labelledby="nexponentli">
+                                                                                    <li><a href="#">1</a></li>
+                                                                                    <li><a href="#">2</a></li>
+                                                                                    <li><a href="#">3</a></li>
+                                                                                    <li><a href="#">4</a></li>
+                                                                                    <li><a href="#">5</a></li>
+                                                                                    <li><a href="#">6</a></li>
+                                                                                </ul>
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+
+                                                                                <table class="table table-bordered">
+                                                                                    <thead>
+                                                                                        <tr>
+
+                                                                                            <div class="dropdown">
+
+                                                                                                <button name="nalpha_equation" value="2" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               Choose Equation
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                                <ul class="dropdown-menu nalpha_equation" aria-labelledby="nalphaequationli">
+                                                                                                    <li>
+                                                                                                        <a href="#" value='1'>
+                                                                                                            <p name='equ'>c*(V-th)/(1-exp[(V-th)*s</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='2'>
+                                                                                                            <p name='equ'>c/(1+exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='3'>
+                                                                                                            <p name='equ'>c*(exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+
+                                                                                                </ul>
+                                                                                            </div>
+
+                                                                                        </tr>
+                                                                                        <tr>Alpha: Closed --> Open</tr>
+                                                                                        <tr>
+                                                                                            <th>Magnitude</th>
+                                                                                            <th><input id="input-box" type="number" name="nac" min="-200" max="200" value="0.010"></th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <th>Threshold</th>
+                                                                                            <th><input id="input-box" type="number" name="nath" min="-200" max="200" value="-55.000"></th>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <th>Slope</th>
+                                                                                            <th><input id="input-box" type="number" name="nas" min="-200" max="200" value="-0.100"></th>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+
+
+
+                                                                            </div>
+                                                                            <div class="col-md-2">
+
+
+
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+
+
+                                                                                <table class="table table-bordered">
+                                                                                    <thead>
+                                                                                        <tr>
+
+                                                                                            <div class="dropdown">
+
+                                                                                                <button name="nbeta_equation" value="1" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               Choose Equation
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                                <ul class="dropdown-menu nbeta_equation" aria-labelledby="nbetaequationli">
+                                                                                                    <li>
+                                                                                                        <a href="#" value='1'>
+                                                                                                            <p name='equ'>c*(V-th)/(1-exp[(V-th)*s</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='2'>
+                                                                                                            <p name='equ'>c/(1+exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='3'>
+                                                                                                            <p name='equ'>c*(exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+
+                                                                                                </ul>
+                                                                                            </div>
+
+                                                                                        </tr>
+                                                                                        <tr>Beta: Closed --> Open</tr>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="nbc" min="-200" max="200" value="0.125"></th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="nbth" min="-200" max="200" value="-65.000"></th>
+                                                                                        </tr>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="nbs" min="-200" max="200" value="-0.0125"></th>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+
+                                                                            </div>
+
+
+
+
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="User_channel">
+                                                        <div class="col-md-6">
+                                                            <table class="table table-boredered">
+                                                                <tr>
+                                                                    <th>g<sub>max</sub>(us)</th>
+                                                                    <th><input id="input-box" type="number" name="gclmax" min="-200" max="200" value="0"></th>
+                                                                </tr>
+                                                            </table>
+
+
+                                                            <div class="panel-group" id="accordion">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion4" href="#p">
+                                                                                        Channel Status: p 
+                                                                                    </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="p" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            <div class="dropdown">
+                                                                                <label>Exponent: </label>
+                                                                                <button name="pexp" value="3" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               3
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                <ul class="dropdown-menu pexponent" aria-labelledby="pexponentli">
+                                                                                    <li><a href="#">1</a></li>
+                                                                                    <li><a href="#">2</a></li>
+                                                                                    <li><a href="#">3</a></li>
+                                                                                    <li><a href="#">4</a></li>
+                                                                                    <li><a href="#">5</a></li>
+                                                                                    <li><a href="#">6</a></li>
+                                                                                </ul>
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+
+                                                                                <table class="table table-bordered">
+                                                                                    <thead>
+                                                                                        <tr>
+
+                                                                                            <div class="dropdown">
+
+                                                                                                <button name="palpha_equation" value="1" class="btn btn-default dropdown-toggle palpha_equation" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               Choose Equation
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                                <ul class="dropdown-menu palpha_equation" aria-labelledby="palphaequationli">
+                                                                                                    <li>
+                                                                                                        <a href="#" value='1'>
+                                                                                                            <p name='equ'>c*(V-th)/(1-exp[(V-th)*s</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='2'>
+                                                                                                            <p name='equ'>c/(1+exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='3'>
+                                                                                                            <p name='equ'>c*(exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+
+                                                                                                </ul>
+                                                                                            </div>
+
+                                                                                        </tr>
+                                                                                        <tr>Alpha: Closed --> Open</tr>
+                                                                                        <tr>
+                                                                                            <th>Magnitude</th>
+                                                                                            <th><input id="input-box" type="number" name="pac" min="-200" max="200" value="0.1"></th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <th>Threshold</th>
+                                                                                            <th><input id="input-box" type="number" name="path" min="-200" max="200" value="-40"></th>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <th>Slope</th>
+                                                                                            <th><input id="input-box" type="number" name="pas" min="-200" max="200" value="0.1"></th>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+
+
+
+                                                                            </div>
+                                                                            <div class="col-md-2">
+
+
+
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+
+
+                                                                                <table class="table table-bordered">
+                                                                                    <thead>
+                                                                                        <tr>
+
+                                                                                            <div class="dropdown">
+
+                                                                                                <button name="pbeta_equation" value="3" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               Choose Equation
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                                <ul class="dropdown-menu pbeta_equation" aria-labelledby="pbetaequationli">
+                                                                                                    <li>
+                                                                                                        <a href="#" value='1'>
+                                                                                                            <p name='equ'>c*(V-th)/(1-exp[(V-th)*s</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='2'>
+                                                                                                            <p name='equ'>c/(1+exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='3'>
+                                                                                                            <p name='equ'>c*(exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+
+                                                                                                </ul>
+                                                                                            </div>
+
+                                                                                        </tr>
+                                                                                        <tr>Beta: Closed --> Open</tr>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="pbc" min="-200" max="200" value="4"></th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="pbth" min="-200" max="200" value="-65"></th>
+                                                                                        </tr>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="pbs" min="-200" max="200" value="-0.05555555555555555"></th>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+
+                                                                            </div>
+
+
+
+
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="panel-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion5" href="#q">
+                                                                                        Channel Status: q
+                                                                                    </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="q" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+
+                                                                            <div class="dropdown">
+                                                                                <label>Exponent: </label>
+                                                                                <button name="qexp" value="3" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               3
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                <ul class="dropdown-menu qexponent" aria-labelledby="qexponentli">
+                                                                                    <li><a href="#">1</a></li>
+                                                                                    <li><a href="#">2</a></li>
+                                                                                    <li><a href="#">3</a></li>
+                                                                                    <li><a href="#">4</a></li>
+                                                                                    <li><a href="#">5</a></li>
+                                                                                    <li><a href="#">6</a></li>
+                                                                                </ul>
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+
+                                                                                <table class="table table-bordered">
+                                                                                    <thead>
+
+                                                                                        <tr>
+
+                                                                                            <div class="dropdown">
+
+                                                                                                <button name="qalpha_equation" value="3" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               Choose Equation
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                                <ul class="dropdown-menu qalpha_equation" aria-labelledby="qalphaequationli">
+                                                                                                    <li>
+                                                                                                        <a href="#" value='1'>
+                                                                                                            <p value="1" name='equ'>c*(V-th)/(1-exp[(V-th)*s</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='2'>
+                                                                                                            <p value="2" name='equ'>c/(1+exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='3'>
+                                                                                                            <p value="3" name='equ'>c*(exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+
+                                                                                                </ul>
+                                                                                            </div>
+
+                                                                                        </tr>
+
+                                                                                        <tr>Alpha: Closed --> Open</tr>
+                                                                                        <tr>
+                                                                                            <th>Magnitude</th>
+                                                                                            <th><input id="input-box" type="number" name="qac" min="-200" max="200" value="0.07"></th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <th>Threshold</th>
+                                                                                            <th><input id="input-box" type="number" name="qath" min="-200" max="200" value="-65"></th>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <th>Slope</th>
+                                                                                            <th><input id="input-box" type="number" name="qas" min="-200" max="200" value="-0.05"></th>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+
+
+
+                                                                            </div>
+                                                                            <div class="col-md-2">
+
+
+
+                                                                            </div>
+
+                                                                            <div class="col-md-6">
+
+
+                                                                                <table class="table table-bordered">
+                                                                                    <thead>
+                                                                                        <tr>
+
+                                                                                            <div class="dropdown">
+
+                                                                                                <button name="qbeta_equation" value="2" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                               Choose Equation
+                                                                                                <span class="caret"></span>
+                                                                                            </button>
+                                                                                                <ul class="dropdown-menu qbeta_equation" aria-labelledby="qbetaequationli">
+                                                                                                    <li>
+                                                                                                        <a href="#" value='1'>
+                                                                                                            <p value="1" name='equ'>c*(V-th)/(1-exp[(V-th)*s</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='2'>
+                                                                                                            <p value="2" name='equ'>c/(1+exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        <a href="#" value='3'>
+                                                                                                            <p value="3" name='equ'>c*(exp[(V-th)*s])</p>
+                                                                                                        </a>
+                                                                                                    </li>
+
+                                                                                                </ul>
+                                                                                            </div>
+
+                                                                                        </tr>
+                                                                                        <tr>Beta: Closed --> Open</tr>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="qbc" min="-200" max="200" value="1"></th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="qbth" min="-200" max="200" value="-35"></th>
+                                                                                        </tr>
+                                                                                        <tr>
+
+                                                                                            <th><input id="input-box" type="number" name="qbs" min="-200" max="200" value="0.1"></th>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+
+
+                                                                            </div>
+
+
+
+
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#drug">
+                                        Drug
+                                    </a>
+                        </h4>
+                    </div>
+                    <div id="drug" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="ttx-slider"><span></span>
+                                <p>TTX(Tetrodoxtoxin) inhibits Na<sup>+</sup></p>
+
+                                <!--p>TTX(Tetrodoxtoxin Conc.): </p-->Inhibition % : <input class="ttx" value="0" min="0" max="100">
+
+                            </div>
+
+                            <div class="tea-slider"><span></span>
+                                <p>TEA(tetraethyammonium) inhibits K<sup>+</sup></p>
+
+                                <!--p>TTX(Tetrodoxtoxin Conc.): </p-->Inhibition % : <input class="tea" value="0" min="0" max="100">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#stimuli">
+                                        Stimuli
+                                    </a>
+                        </h4>
+                    </div>
+                    <div id="stimuli" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <div class="col-md-8">
+                                <button id='choose_stim' type="button" class="btn btn-primary" data-toggle="modal" data-target="#Cstim1">Config Stim 1</button>
+
+                                <!-- Modal -->
+
+
+                                <!-- Voltage STIMULUS 1 -->
+                                <div id="Vstim1" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title"></h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="panel-body">
+
+                                                    <div class="container col-md-8">
+
+
+                                                        <table class="table table-condensed">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Step Voltage</th>
+                                                                    <th>Step Voltage Time</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Voltage 1 <input type="number" name="vstep1" min="-100" max="100" value="-60"></td>
+                                                                    <td>Time Span 1 <input type="number" name="vstep1time" min="0" max="20" value="20"></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Voltage 2 <input type="number" name="vstep2" min="-100" max="100" value="-20"></td>
+                                                                    <td>Time Span 2 <input type="number" name="vstep2time" min="0" max="20" value="20"></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Voltage 3 <input type="number" name="vstep3" min="-100" max="100" value="-60"></td>
+                                                                    <td>Time Span 3 <input type="number" name="vstep3time" min="0" max="20" value="20"></td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+
+
+
+
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+
+
+
+
+                                <!-- Current STIMULUS 1 -->
+                                <div id="Cstim1" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title"></h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="panel-body">
+
+
+                                                    <div class="container col-md-6">
+
+
+                                                        <table class="table table-condensed">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Current Stim Time</th>
+                                                                    <th>Stim Value</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        Start <input type="number" name="inj-start1" min="0" max="20" value="1">
+                                                                        <br>
+                                                                        <br> Stop <input type="number" name="inj-stop1" min="0" max="20" value="20">
+
+                                                                    </td>
+                                                                    <td><br>Value <input type="number" name="inj-value1" min="-100" max="100" value="20"></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Start <input type="number" name="inj-start2" min="0" max="20" value="13">
+                                                                        <br>
+                                                                        <br> Stop <input type="number" name="inj-stop2" min="0" max="20" value="18">
+
+                                                                    </td>
+
+                                                                    <td><br>Value <input type="number" name="inj-value2" min="-100" max="100" value="20"></td>
+
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+
+
+
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="hhsim()">RUN</button>
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#export_model">Export</button>
+        <button class="btn btn-danger" onclick="reset()">Reset</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="export_model" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Data to Export</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <table class="table">
+
+                                <tbody>
+                                    <tr>
+
+                                        <td><label><input name="data_exp[]" type="checkbox" value="Time (ms)" checked >Time</label></td>
+
+                                        <td><label><input name="data_exp[]" type="checkbox" value="voltage (mV)" checked >Membrane Voltage</label></td>
+                                        <td><label><input name="data_exp[]" type="checkbox" value="current (nA)">Current</label></td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td><label><input name="data_exp[]" type="checkbox" value="m">m</label></td>
+                                        <td><label><input name="data_exp[]" type="checkbox" value="n">n</label></td>
+                                        <td><label><input name="data_exp[]" type="checkbox" value="h">h</label></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><label><input name="data_exp[]" type="checkbox" value="ina (uA)">INa</label></td>
+                                        <td><label><input name="data_exp[]" type="checkbox" value="ik (uA)">IK</label></td>
+                                        <td><label><input name="data_exp[]" type="checkbox" value="iuser (uA)">IUser</label></td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td><label><input name="data_exp[]" type="checkbox" value="gna (uS)">gNa</label></td>
+                                        <td><label><input name="data_exp[]" type="checkbox" value="gk (uS)">gK</label></td>
+                                        <td><label><input name="data_exp[]" type="checkbox" value="guser (uS)">gUser</label></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="container">
+                                <div class='row'>
+                                    <div class="col-md-2">
+                                        <label> Filename:  <input name="filename" value="Neuron Sim"></label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-md btn-info" onclick='export_as_csv()'>Download</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+</div>
+
+
+
+<script src="js/currentClamp.js"></script>
+<script src="js/voltageClamp.js"></script>
+<script src="js/hhsim.js"></script>

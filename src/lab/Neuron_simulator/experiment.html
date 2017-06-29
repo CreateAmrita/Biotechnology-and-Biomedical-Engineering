@@ -1,0 +1,80 @@
+<!--- COMMENT
+Amrita Neuron Simulator is a web based Neuron simulator for Hodgkin-Huxley, Adex and Izhikevich models written in HTML5 and Javscript.
+
+
+Developed by : Joshy Alphonse & Shyam Diwakar
+Computational Neuroscience & Neurophysiology Lab, School of Biotechnology, Amrita University, India.
+Email: joshy01234i@gmail.com; shyam@amrita.edu
+www.amrita.edu/compneuro
+
+
+The main layout for the simulator is loaded and later other neuron specific html layout in the layout folder is loaded via jquery into the neuron div of this html.
+
+--->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Amrita Neuron Simulator</title>
+
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/rangeSlider.css" rel='stylesheet'>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/rangeSlider.js"></script>
+    <script src="js/highstock.js"></script>
+    <script src="js/exporting.js"></script>
+    <script src="js/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body>
+    <div class="col-md-10 col-height">
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3 class="panel-title" style="font-size:24px; text-align: center;">Amrita Neuron Simulator</h3>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dropdown">
+                            <button name="neuron" class="btn dropdown-toggle" type="button" data-toggle="dropdown">Select Neuron
+    <span class="caret"></span></button>
+                            <ul class="dropdown-menu neuron-list">
+                                <li><a value='hh'>Hodgkin Huxley</a></li>
+                                <li><a value='izi' >Izhikevich</a></li>
+                                <li><a value="adex">Adex</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="neuron"></div>
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <script src="js/main.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
